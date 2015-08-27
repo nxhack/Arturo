@@ -66,7 +66,9 @@ class Upload(Command):
 
         # send a hangup signal when the last process closes the tty
         file_switch = '-f' if platform.system() == 'Darwin' else '-F'
-        ret = subprocess.call([self.e['stty'], file_switch, port, 'hupcl'])
+        #ret = subprocess.call([self.e['stty'], file_switch, port, 'hupcl'])
+        # under cygwin stty hupcl : unable to perform all requested operations
+        ret = subprocess.call([self.e['stty'], file_switch, port, 'cs8'])
         if ret:
             raise Abort("stty failed")
 
@@ -133,7 +135,8 @@ class Upload(Command):
             self.e['avrdude'],
             '-C', self.e['avrdude.conf'],
             '-p', BoardModels.getValueForVariant(board, boardVariant, 'build', 'mcu'),
-            '-P', port,
+            #'-P', port,
+            '-P', '\\.\com5',
             '-c', protocol,
             '-b', BoardModels.getValueForVariant(board, boardVariant, 'upload', 'speed'),
             '-D',
