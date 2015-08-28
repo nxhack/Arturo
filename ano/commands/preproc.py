@@ -89,7 +89,7 @@ class Preprocess(Command):
             elif c == '}':
                 nesting -= 1
                 result.append(c)
-        
+
         return ''.join(result)
 
     def strip(self, src):
@@ -99,13 +99,13 @@ class Preprocess(Command):
         """
         # single-quoted character
         p = "('.')"
-        
+
         # double-quoted string
         p += "|(\"(?:[^\"\\\\]|\\\\.)*\")"
-        
+
         # single and multi-line comment
         p += "|(//.*?$)|(/\\*[^*]*(?:\\*(?!/)[^*]*)*\\*/)"
-        
+
         # pre-processor directive
         p += "|" + "(^\\s*#.*?$)"
 

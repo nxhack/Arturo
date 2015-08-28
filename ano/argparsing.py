@@ -7,7 +7,7 @@ import textwrap
 
 class FlexiFormatter(argparse.RawTextHelpFormatter):
     """FlexiFormatter which respects new line formatting and wraps the rest
-    
+
     Example:
         >>> parser = argparse.ArgumentParser(formatter_class=FlexiFormatter)
         >>> parser.add_argument('--example', help='''\
@@ -22,7 +22,7 @@ class FlexiFormatter(argparse.RawTextHelpFormatter):
         ...
         ...     You must use backslashes at the end of lines to indicate that\
         ...     you want the text to wrap instead of preserving the newline.
-        ...    
+        ...
         ...     As with docstrings, the leading space to the text block is\
         ...     ignored.
         ... ''')
@@ -65,7 +65,7 @@ class FlexiFormatter(argparse.RawTextHelpFormatter):
                 sub_indent = indent + len(list_match.group(2))
             else:
                 sub_indent = indent
-            
+
             # Textwrap will do all the hard work for us
             line = self._whitespace_matcher.sub(' ', line).strip()
             new_lines = textwrap.wrap(
@@ -74,7 +74,7 @@ class FlexiFormatter(argparse.RawTextHelpFormatter):
                 initial_indent=' '*(indent-main_indent),
                 subsequent_indent=' '*(sub_indent-main_indent),
             )
-            
+
             # Blank lines get eaten by textwrap, put it back with [' ']
             lines.extend(new_lines or [' '])
 
@@ -93,7 +93,7 @@ if __name__ == '__main__':
 
         You must use backslashes at the end of lines to indicate that you\
         want the text to wrap instead of preserving the newline.
-        
+
         As with docstrings, the leading space to the text block is ignored.
     ''')
     parser.parse_args(['-h'])

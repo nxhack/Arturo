@@ -68,7 +68,7 @@ def main():
 
         if current_command not in run_anywhere:
             # For valid projects create .build & lib
-            if not os.path.isdir(e.build_dir):                
+            if not os.path.isdir(e.build_dir):
                 os.makedirs(e.build_dir)
 
             if not os.path.isdir(e.lib_dir):

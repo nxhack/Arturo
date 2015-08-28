@@ -20,7 +20,7 @@ class Serial(Command):
         super(Serial, self).setup_arg_parser(parser)
         parser.add_argument('-p', '--serial-port', metavar='PORT',
                             help='Serial port to communicate with\nTry to guess if not specified')
-        parser.add_argument('-b', '--baud-rate', metavar='RATE', type=int, default=9600, 
+        parser.add_argument('-b', '--baud-rate', metavar='RATE', type=int, default=9600,
                             help='Communication baud rate, should match value set in Serial.begin() on Arduino')
         parser.add_argument('remainder', nargs='*', metavar='ARGS',
                             help='Extra picocom args that are passed as is')
