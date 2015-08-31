@@ -133,7 +133,9 @@ class Upload(Command):
             port = new_port
 
         # call avrdude to upload .hex
-        comport = args.com_port if ('com_port' in args) else port;
+        comport = args.com_port
+        if comport == None:
+            comport = port
         subprocess.call([
             self.e['avrdude'],
             '-C', self.e['avrdude.conf'],
