@@ -32,6 +32,8 @@ class Upload(Command):
         super(Upload, self).setup_arg_parser(parser)
         parser.add_argument('-p', '--serial-port', metavar='PORT',
                             help='Serial port to upload firmware to\nTry to guess if not specified')
+        parser.add_argument('-P', '--com-port', metavar='COMPORT',
+                            help='Serial(COM) port to upload firmware to\nTry to guess if not specified')
 
         self.e.add_board_model_arg(parser)
         self.e.add_arduino_dist_arg(parser)
@@ -131,12 +133,12 @@ class Upload(Command):
             port = new_port
 
         # call avrdude to upload .hex
+        comport = args.com_port if ('com_port' in args) else port;
         subprocess.call([
             self.e['avrdude'],
             '-C', self.e['avrdude.conf'],
             '-p', BoardModels.getValueForVariant(board, boardVariant, 'build', 'mcu'),
-            #'-P', port,
-            '-P', '\\.\com5',
+            '-P', comport,
             '-c', protocol,
             '-b', BoardModels.getValueForVariant(board, boardVariant, 'upload', 'speed'),
             '-D',
